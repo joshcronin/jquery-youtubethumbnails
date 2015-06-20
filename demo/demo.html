@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>YouTube thumbnail plugin demo</title>
+		<style type="text/css">
+			h1,
+			body {
+				font-family: sans-serif;
+				font-weight: 300;
+				text-align: center;
+				margin: 10px;
+			}
+			h1 {
+				line-height: 42px;
+				font-size: 36px;				
+			}
+			img {
+				max-width: 100%;
+				display: block;
+				margin: 10px auto;
+			}
+		</style>
+	</head>
+	<body>
+
+		<h1>jQuery YouTube thumbnail plugin</h1>
+		<div class="video-thumbs">
+			<a href="https://www.youtube.com/watch?v=I54vzcQmnKY" target="_blank">The video - https://www.youtube.com/watch?v=I54vzcQmnKY</a>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="../jquery-youtubethumbnails.min.js" type="text/javascript"></script>
+		
+		<script type="text/javascript">
+			//When document is ready
+			$(document).ready(function() {
+				//Call the YouTube thumbnail plugin
+				$(document).YTthumbnail({
+					apiKey: 'AIzaSyCsVn7oOtXQE3rcr-MYgIfeeeN-qQZ6bY4',//Specify the API key
+					videoID: '-YGDyPAwQz0',//Specify the video ID
+					callback: function(bestQuality, thumbnails) {
+						//Add the best quality image
+						$('.video-thumbs').append('<p>Best quality</p><img src="' + bestQuality.url + '" title="Best quality - Image size:' + bestQuality.width + 'x' + bestQuality.height + '">');
+						$('.video-thumbs').append('<p>All thumbnails</p>');
+						//Append all the thumbnails
+						for (thumbnail in thumbnails) {
+							$('.video-thumbs').append('<img src="' + thumbnails[thumbnail].url + '" title="Image size:' + thumbnails[thumbnail].width + 'x' + thumbnails[thumbnail].height + '">');
+						}
+					}
+				});
+			});
+		</script>
+
+	</body>
+</html>
